@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <style>
+      body {
+        background-position: center;
+        background-image: url('{{ url_for('static', filename='assets/roadWithCherryBlossomTree.png') }}');
+        background-size: cover; /* Adjusted to cover the entire container */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        width: 100%;
+      }
+      .form__container {
+        width: 100%;
+        margin: 2rem auto; /* Center the container horizontally */
+      }
+      .input-group {
+        border-radius: 10%;
+        width: 50%;
+        margin: 0 auto; /* Center the input group horizontally */
+      }
+     .container__search-bar{
+      background-color: pink; /* Blue background color */
+      color: #fff; 
+      border: solid;
+      padding: 10px 20px; 
+      border-radius: 5px;
+      cursor: pointer; 
+     }
+     .container__search-bar:hover {
+        background-color: palevioletred; 
+        transform: scale(1.2);
+     }
+  </style>
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+{% for message in messages %}
+    <div>{{ message }}</div>
+{% endfor %}
+
+<div class="container">
+  <div class="form__container">
+  <form class="form__container-inline">
+    <div class="input-group">
+      <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="search-btn">
+      <div class="input-group-append">
+        <button class="container__search-bar" type="submit" id="search-btn">Search</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <style>
+      body {
+        background-position: center;
+        background-image: url('{{ url_for('static', filename='assets/roadWithCherryBlossomTree.png') }}');
+        background-size: cover; /* Adjusted to cover the entire container */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        width: 100%;
+      }
+      .form__container {
+        width: 100%;
+        margin: 2rem auto; /* Center the container horizontally */
+      }
+      .input-group {
+        border-radius: 10%;
+        width: 50%;
+        margin: 0 auto; /* Center the input group horizontally */
+      }
+     .register-input {
+        color: pink;
+        border-radius: 5px;
+     }
+     .register-input:active {
+        box-shadow: 3px 3px 5px white;
+     }
+     .register-submit {
+        background-color:pink; 
+        color: #fff; 
+        border: solid;
+        padding: 10px 20px;
+        border-radius: 5px; 
+        cursor: pointer;
+     }
+     .register-submit:hover {
+        box-shadow: 3px 3px 5px; 
+        transform: scale(1.2);
+        background-color: palevioletred;
+     }
+    </style>
+</head>
+<body>
+    <h1 style="color: white;">Register</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="post">
+        <div>
+            <label style="color: white;" for="username">Username:</label>
+            <input class="register-input" type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label style="color: white;" for="password">Password:</label>
+            <input class="register-input" type="password" id="password" name="password" required>
+        </div>
+        <button class="register-submit" type="submit">Register</button>
+    </form>
+</body>
+</html>
