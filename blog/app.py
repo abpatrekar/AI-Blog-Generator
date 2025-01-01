@@ -57,18 +57,19 @@ def logout():
 
 @app.route('/generate_post', methods=['POST'])
 def generate_post():
+    topic = request.form['topic']
+    content = generate_blog_post(topic)
     if 'user_id' in session:
-        topic = request.form['topic']
         user_id = session['user_id']
         user = User.query.get(user_id)
-        content = generate_blog_post(topic)
         post = BlogPost(title=topic, content=content, author=user)
         db.session.add(post)
         db.session.commit()
-        flash('Blog post generated successfully!', 'success')
+        flash('Blog post generated and saved successfully!', 'success')
     else:
-        flash('You need to login to generate a post', 'error')
-    return redirect(url_for('index'))
+        flash('Blog post generated successfully! (Not saved as you are not logged in)', 'info')
+    return render_template('blog.html', blog_title=topic, blog_content=content)
+
 
 @app.route('/history')
 def history():
