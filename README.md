@@ -1,5 +1,7 @@
-#AI Blog Generator Documentation
-##Overview
+# AI Blog Generator
+
+## Overview
+
 The AI Blog Generator is a web application that allows users to generate blog posts using AI, based on topics or keywords they provide. Users can create an account, log in, and access a history of previously generated blog posts. The application uses OpenAI’s API to generate content and features a responsive user interface for easy interaction.
 
 Features
