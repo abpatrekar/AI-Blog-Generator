@@ -1,20 +1,33 @@
-import openai
-import os
+import requests
 
-# Set your OpenAI API key
-#openai.api_key = ""  # Make sure to set this environment variable
+# Hugging Face Inference API URL and your API token
+API_URL = "https://api-inference.huggingface.co/models/EleutherAI/gpt-j-6B"
+HEADERS = {"Authorization": f"Bearer "}#ENTER YOUR KEY HERE
+
 def generate_blog_post(topic):
-    prompt = f"Write a blog post about {topic}."
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",  # Use "gpt-4" if needed
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant for writing blog posts."},
-            {"role": "user", "content": prompt},
-        ],
-        temperature=0.7,
-        max_tokens=500,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0,
-    )
-    return response['choices'][0]['message']['content'].strip()
+    # Create the prompt for the blog post
+    prompt = f"Write a detailed blog post about {topic}."
+    
+    # Payload for the API
+    payload = {
+        "inputs": prompt,
+        "parameters": {
+            "max_length": 500,
+            "temperature": 0.7,
+        },
+    }
+    
+    # Send the request to Hugging Face Inference API
+    response = requests.post(API_URL, headers=HEADERS, json=payload)
+    
+    if response.status_code == 200:
+        # Extract and return the generated text
+        return response.json()[0]['generated_text'].strip()
+    else:
+        # Handle errors
+        return f"Error: {response.status_code} - {response.text}"
+
+# Example usage
+# Replace "YOUR_HUGGINGFACE_API_TOKEN" with your actual Hugging Face token
+#blog_post = generate_blog_post("The importance of mental health awareness")
+#print(blog_post)
